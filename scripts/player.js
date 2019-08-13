@@ -15,6 +15,8 @@ class Player {
   }
   
   playPause (song = this.currentlyPlaying) {
+     console.log("get duration 1 = " + player.getDurarion());
+    
     if (this.currentlyPlaying !== song) {
       // Stop the currently playing sound file (even if nothing is playing)
       this.soundObject.stop();
@@ -25,17 +27,23 @@ class Player {
       this.currentlyPlaying = song;
       this.playState = 'stopped';
       this.soundObject = new buzz.sound(this.currentlyPlaying.soundFileUrl);
+      console.log("get duration 2 = " + player.getDuration());
     }
+    
     if (this.playState === 'paused' || this.playState === 'stopped') {
       this.soundObject.setVolume( this.volume );
       this.soundObject.play();
       this.playState = 'playing';
       this.currentlyPlaying.element.removeClass('paused').addClass('playing');
+      console.log("get duration 3 = " + player.getDuration());
+      
     } else {
       this.soundObject.pause();
       this.playState = 'paused';
       this.currentlyPlaying.element.removeClass('playing').addClass('paused');
+      console.log("get duration 4 = " + player.getDuration());
     }
+     console.log("get duration 5 = " + player.getDuration());
   }
   
   skipTo (percent) {
