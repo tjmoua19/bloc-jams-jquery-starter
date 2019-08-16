@@ -1,17 +1,17 @@
 
 {
-    album.songs.forEach( (song, index) => {
-        song.element = $(`
-          <tr>
-            <td> 
-                <button>
-                    <span class='song-number'>${index+1}</span>
-                    <span class='ion-md-play'></span>
-                    <span class='ion-md-pause'></span>
-            </button>
-            </td>
-            <td>${song.title}</td>
-            <td>${player.prettyTime(song.duration)}</td>
+  album.songs.forEach( (song, index) => {
+     song.element = $(`
+        <tr>
+          <td> 
+             <button>
+                <span class='song-number'>${index+1}</span>
+                <span class='ion-md-play'></span>
+                <span class='ion-md-pause'></span>
+             </button>
+          </td>
+             <td>${song.title}</td>
+             <td>${player.prettyTime(song.duration)}</td>
            </tr>
         `);
         
