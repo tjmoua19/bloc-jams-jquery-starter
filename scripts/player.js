@@ -6,6 +6,16 @@ class Player {
     this.soundObject = new buzz.sound(this.currentlyPlaying.soundFileUrl);
   }
 
+  prettyTime (timeInSeconds) {
+    if (player.playState !== 'playing') {return;}
+    const sec_num = parseInt(timeInSeconds, 10);
+    const seconds = Math.floor(sec_num % 60);
+    const minutes = Math.floor((sec_num % 3600) / 60);
+    const percent = (currentTime / duration) * 100; //maybe?//
+    return ( minutes + ":" + seconds);
+  }
+
+
   getDuration() {
     return this.soundObject.getDuration();
   }
@@ -15,33 +25,27 @@ class Player {
   }
 
   playPause (song = this.currentlyPlaying) {
-    console.log("get duration 1 = " + player.getDuration());
-
     if (this.currentlyPlaying !== song) {
+      // Stop the currently playing sound file (even if nothing is playing)
       this.soundObject.stop();
+      // Clear classes on the song that's currently playing
       this.currentlyPlaying.element.removeClass('playing paused');
 
+      // Update our currentlyPlaying and playState properties
       this.currentlyPlaying = song;
       this.playState = 'stopped';
       this.soundObject = new buzz.sound(this.currentlyPlaying.soundFileUrl);
-      console.log("get duration 2 = " + player.getDuration());
     }
-    
     if (this.playState === 'paused' || this.playState === 'stopped') {
       this.soundObject.setVolume( this.volume );
       this.soundObject.play();
       this.playState = 'playing';
       this.currentlyPlaying.element.removeClass('paused').addClass('playing');
-      console.log("get duration 3 = " + player.getDuration());
-      
     } else {
       this.soundObject.pause();
       this.playState = 'paused';
       this.currentlyPlaying.element.removeClass('playing').addClass('paused');
-      console.log("get duration 4 = " + player.getDuration());
     }
-    
-    console.log("get duration 5 = " + player.getDuration());
   }
 
   skipTo (percent) {
@@ -56,4 +60,3 @@ class Player {
 }
 
 const player = new Player();
-
